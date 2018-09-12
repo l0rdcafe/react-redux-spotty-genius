@@ -9,6 +9,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
+    "react-spinkit": "^3.0.0",
     "rebass": "^2.0.0-10",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",

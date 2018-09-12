@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Container, Heading, Text, ButtonCircle, Flex, Circle, Box, Blockquote } from "rebass";
+import Loading from "./loading";
 import { setToken } from "../actions/token";
 import { signInError, signInSuccess, getUser, signOutSuccess, getNotes, pollSong, getLyrics } from "../actions/shared";
 
@@ -81,7 +82,7 @@ class Callback extends React.Component {
           </Link>
         )}
         <Heading style={{ textAlign: "center" }} mb={4}>
-          {loading && "Loading..."}
+          {loading && <Loading />}
           {!loading && user && `Welcome, ${user}.`}
         </Heading>
         <Text style={{ textAlign: "center" }} color={error ? "red" : "black"} mb={4}>
@@ -101,7 +102,7 @@ class Callback extends React.Component {
         </Text>
         {loadingStats && (
           <Text my={4} style={{ textAlign: "center" }}>
-            Loading...
+            <Loading />
           </Text>
         )}
         {login &&
@@ -159,8 +160,8 @@ class Callback extends React.Component {
               {lyrics}
             </Blockquote>
           )}
-        {loadingNotes && isPlaying && login && <Text style={{ textAlign: "center" }}>Loading...</Text>}
-        {loadingLyrics && isPlaying && login && <Text style={{ textAlign: "center" }}>Loading...</Text>}
+        {loadingNotes && isPlaying && login && <Text style={{ textAlign: "center" }}><Loading /></Text>}
+        {loadingLyrics && isPlaying && login && <Text style={{ textAlign: "center" }}><Loading /></Text>}
         {(error || (!login && !loading)) && (
           <Link to="/" style={{ color: "white", textDecoration: "none" }}>
             <ButtonCircle onClick={this.signOut} style={{ display: "block", margin: "auto", cursor: "pointer" }}>

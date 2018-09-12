@@ -92,28 +92,31 @@ const signOutSuccess = () => ({ type: SIGN_OUT_SUCCESS });
 
 const pollSong = options => async (dispatch, getState) => {
   while (true) {
-    try {
-      const result = await getCurrentlyPlaying(options);
-      const state = getState();
-      const { id } = state.currSong;
-      const { id: resId } = result.item;
+    const { login } = getState();
+    if (login) {
+      try {
+        const result = await getCurrentlyPlaying(options);
+        const state = getState();
+        const { id } = state.currSong;
+        const { id: resId } = result.item;
 
-      const res = {
-        id: resId,
-        song: result.item.name,
-        isPlaying: result.is_playing,
-        artist: result.item.artists[0].name,
-        duration: convertMillisToMinsSecs(result.item.duration_ms),
-        name: state.user
-      };
+        const res = {
+          id: resId,
+          song: result.item.name,
+          isPlaying: result.is_playing,
+          artist: result.item.artists[0].name,
+          duration: convertMillisToMinsSecs(result.item.duration_ms),
+          name: state.user
+        };
 
-      dispatch(getUserSuccess(res));
+        dispatch(getUserSuccess(res));
 
-      if (id !== resId) {
-        dispatch(getSongInfo(resId, options));
+        if (id !== resId) {
+          dispatch(getSongInfo(resId, options));
+        }
+      } catch (e) {
+        dispatch(getUserError(e));
       }
-    } catch (e) {
-      dispatch(getUserError(e));
     }
     await sleep(5000);
   }
