@@ -41,7 +41,7 @@ const getUserInfo = async options => {
     const song = resp[1].item.name;
     const duration = convertMillisToMinsSecs(resp[1].item.duration_ms);
 
-    return { data: { name, id, isPlaying, song, artist, duration } };
+    return { data: { name, id: isPlaying ? id : "", isPlaying, song, artist, duration } };
   }
 
   return parseResponse(result);

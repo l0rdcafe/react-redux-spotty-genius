@@ -124,15 +124,6 @@ class Callback extends React.Component {
               </Box>
             </Flex>
           )}
-        {isPlaying &&
-          login &&
-          !loadingNotes &&
-          !notes &&
-          !error && (
-            <ButtonCircle style={{ display: "block", margin: "auto", cursor: "pointer" }} onClick={this.getAnnotations}>
-              GET NOTES
-            </ButtonCircle>
-          )}
         {!loadingNotes &&
           isPlaying &&
           login &&
@@ -160,8 +151,20 @@ class Callback extends React.Component {
               {lyrics}
             </Blockquote>
           )}
-        {loadingNotes && isPlaying && login && <Text style={{ textAlign: "center" }}><Loading /></Text>}
-        {loadingLyrics && isPlaying && login && <Text style={{ textAlign: "center" }}><Loading /></Text>}
+        {loadingNotes &&
+          isPlaying &&
+          login && (
+            <Text style={{ textAlign: "center" }}>
+              <Loading />
+            </Text>
+          )}
+        {loadingLyrics &&
+          isPlaying &&
+          login && (
+            <Text style={{ textAlign: "center" }}>
+              <Loading />
+            </Text>
+          )}
         {(error || (!login && !loading)) && (
           <Link to="/" style={{ color: "white", textDecoration: "none" }}>
             <ButtonCircle onClick={this.signOut} style={{ display: "block", margin: "auto", cursor: "pointer" }}>
